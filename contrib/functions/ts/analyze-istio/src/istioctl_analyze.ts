@@ -140,7 +140,7 @@ metadata:
   annotations:
     config.k8s.io/function: |
       container:
-        image: gcr.io/kpt-fn-contrib/analyze-istio:unstable
+        image: gcr.io/krm-fn-contrib/analyze-istio:unstable
     config.kubernetes.io/local-config: "true"
 data:
   "${FLAG_ARGS}": ["--recursive"]
