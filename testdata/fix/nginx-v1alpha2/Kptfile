@@ -28,15 +28,15 @@ info:
   man: nginx man text
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configMap:
         image: nginx
         list: '[dev, stage]'
         namespace: some-space
         tag: 1.14.1
-    - image: gcr.io/kpt-fn/set-annotations:v0.1
+    - image: ghcr.io/kptdev/krm-functions-catalog/set-annotations:v0.1
       configPath: my-annotations.yaml
-    - image: gcr.io/kpt-fn/set-labels:v0.1
+    - image: ghcr.io/kptdev/krm-functions-catalog/set-labels:v0.1
       configPath: set-labels.yaml
 inventory:
   namespace: some-space

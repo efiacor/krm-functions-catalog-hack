@@ -122,35 +122,35 @@ func (hcp *HelmChartProcessor) configMapArgs(
 		p.ConfigHome = val
 	}
 	if val, found, _ := m.NestedString("data", "name"); found {
-		p.ChartArgs.Name = val
+		p.Name = val
 	}
 	if val, found, _ := m.NestedString("data", "version"); found {
-		p.ChartArgs.Version = val
+		p.Version = val
 	}
 	if val, found, _ := m.NestedString("data", "repo"); found {
-		p.ChartArgs.Repo = val
+		p.Repo = val
 	}
 	if val, found, _ := m.NestedString("data", "releaseName"); found {
-		p.TemplateOptions.ReleaseName = val
+		p.ReleaseName = val
 	}
 	if val, found, _ := m.NestedString("data", "namespace"); found {
-		p.TemplateOptions.Namespace = val
+		p.Namespace = val
 	}
 	if val, found, _ := m.NestedString("data", "nameTemplate"); found {
-		p.TemplateOptions.NameTemplate = val
+		p.NameTemplate = val
 	}
 	if val, found, _ := m.NestedString("data", "includeCRDs"); found {
 		if val == "true" {
-			p.TemplateOptions.IncludeCRDs = true
+			p.IncludeCRDs = true
 		}
 	}
 	if val, found, _ := m.NestedString("data", "skipTests"); found {
 		if val == "true" {
-			p.TemplateOptions.SkipTests = true
+			p.SkipTests = true
 		}
 	}
 	if val, found, _ := m.NestedString("data", "valuesFile"); found {
-		p.TemplateOptions.ValuesFiles = []string{val}
+		p.ValuesFiles = []string{val}
 	}
 	if err := p.ValidateArgs(); err != nil {
 		return err

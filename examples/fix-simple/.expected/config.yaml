@@ -1,2 +1,2 @@
 testType: eval
-image: gcr.io/kpt-fn/fix:unstable
+image: ghcr.io/kptdev/krm-functions-catalog/fix:unstable

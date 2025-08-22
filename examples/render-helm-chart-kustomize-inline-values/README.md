@@ -23,7 +23,7 @@ generators:
       config.kubernetes.io/function: |
         container:
           network: true
-          image: gcr.io/kpt-fn/render-helm-chart:unstable
+          image: ghcr.io/kptdev/krm-functions-catalog/render-helm-chart:unstable
   helmCharts:
   - name: ocp-pipeline
     namespace: mynamespace

@@ -22,7 +22,7 @@ metadata:
   name: example
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/set-labels:unstable
+    - image: ghcr.io/kptdev/krm-functions-catalog/set-labels:unstable
       configMap:
         color: orange
         fruit: apple

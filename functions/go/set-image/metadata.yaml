@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/set-image
+image: ghcr.io/kptdev/krm-functions-catalog/set-image
 description: Set all images of a given name to a given name:tag or name@digest.
 tags:
   - mutator

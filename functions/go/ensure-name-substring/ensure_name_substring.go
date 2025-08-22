@@ -109,9 +109,10 @@ func (ens *EnsureNameSubstring) Transform(m resmap.ResMap) error {
 				// If we are changing "metadata/name", we tracks the original
 				// name and the prefix or suffix being added.
 				r.StorePreviousId()
-				if ens.EditMode == Prepend {
+				switch ens.EditMode {
+				case Prepend:
 					r.AddNamePrefix(ens.Substring)
-				} else if ens.EditMode == Append {
+				case Append:
 					r.AddNameSuffix(ens.Substring)
 				}
 			}
@@ -119,9 +120,10 @@ func (ens *EnsureNameSubstring) Transform(m resmap.ResMap) error {
 			fltr := prefixsuffix.Filter{
 				FieldSpec: fs,
 			}
-			if ens.EditMode == Prepend {
+			switch ens.EditMode {
+			case Prepend:
 				fltr.Prefix = ens.Substring
-			} else if ens.EditMode == Append {
+			case Append:
 				fltr.Suffix = ens.Substring
 			}
 			err = r.ApplyFilter(fltr)

@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/create-setters
+image: ghcr.io/kptdev/krm-functions-catalog/create-setters
 description: Parameterize the field values by adding setter comments.
 tags:
   - mutator

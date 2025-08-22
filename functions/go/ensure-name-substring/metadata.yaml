@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/ensure-name-substring
+image: ghcr.io/kptdev/krm-functions-catalog/ensure-name-substring
 description: Ensures that a resource name contains the given substring.
 tags:
   - mutator

@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/source-gcloud-config # TODO
+image: ghcr.io/kptdev/krm-functions-catalog/source-gcloud-config # TODO
 description: Add a ConfigMap resource to contain gcloud configurations.
 tags:
   - generator

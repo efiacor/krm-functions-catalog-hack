@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/generate-kpt-pkg-docs
+image: ghcr.io/kptdev/krm-functions-catalog/generate-kpt-pkg-docs
 description: Generate opinionated blueprint documentation.
 tags:
   - generator

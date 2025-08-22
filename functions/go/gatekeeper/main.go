@@ -95,7 +95,7 @@ func (gkp *GatekeeperProcessor) ProcessInput() error {
 	if len(content) > 0 && content[0] == '{' {
 		// yaml.Unmarshal doesn't fail on trying to parse JSON, and will happily
 		// return something. This safeguards against that.
-		return fmt.Errorf("tried to parse JSON as YAML. Use --json flag.")
+		return fmt.Errorf("tried to parse JSON as YAML. Use --json flag")
 	}
 
 	gkp.inputBuf = bytes.NewBuffer(content)

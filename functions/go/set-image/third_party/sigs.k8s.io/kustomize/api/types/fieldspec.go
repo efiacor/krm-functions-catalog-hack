@@ -48,7 +48,7 @@ type FsSlice []FieldSpec
 func (s FsSlice) Len() int      { return len(s) }
 func (s FsSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 func (s FsSlice) Less(i, j int) bool {
-	return s[i].Gvk.IsLessThan(s[j].Gvk)
+	return s[i].IsLessThan(s[j].Gvk)
 }
 
 // MergeAll merges the argument into this, returning the result.

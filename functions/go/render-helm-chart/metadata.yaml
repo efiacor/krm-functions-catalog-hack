@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/render-helm-chart
+image: ghcr.io/kptdev/krm-functions-catalog/render-helm-chart
 description: Renders a local or remote helm chart.
 tags:
   - mutator

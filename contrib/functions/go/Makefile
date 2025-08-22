@@ -15,7 +15,7 @@
 SHELL=/bin/bash
 GOPATH := $(shell go env GOPATH)
 TAG ?= unstable
-GCR = gcr.io/kpt-fn-contrib
+DEFAULT_CONTRIB_CR ?= ghcr.io/kptdev/krm-functions-catalog/krm-fn-contrib
 GOBIN := $(shell go env GOPATH)/bin
 
 # Edit this list to contain all go functions
@@ -69,14 +69,14 @@ build: generate $(FUNCTION_BUILDS) ## Build all function images. 'TAG' env is us
 
 .PHONY: $(FUNCTION_BUILDS)
 $(FUNCTION_BUILDS):
-	$(MAKE) CURRENT_FUNCTION=$(subst -BUILD,,$@) TAG=$(TAG) DEFAULT_GCR=$(GCR) func-build
+	$(MAKE) CURRENT_FUNCTION=$(subst -BUILD,,$@) TAG=$(TAG) DEFAULT_CR=$(DEFAULT_CONTRIB_CR) func-build
 
 .PHONY: push
 push: $(FUNCTION_PUSH) ## Push images to registry. WARN: This operation should only be done in CI environment.
 
 .PHONY: $(FUNCTION_PUSH)
 $(FUNCTION_PUSH):
-	$(MAKE) CURRENT_FUNCTION=$(subst -PUSH,,$@) TAG=$(TAG) DEFAULT_GCR=$(GCR) func-push
+	$(MAKE) CURRENT_FUNCTION=$(subst -PUSH,,$@) TAG=$(TAG) DEFAULT_CR=$(DEFAULT_CONTRIB_CR) func-push
 
 .PHONY: check-licenses
 check-licenses: install-go-licenses $(FUNCTION_CHECKLICENSES)

@@ -129,7 +129,7 @@ func Read(n *yaml.RNode, fm *fieldmeta.FieldMeta) error {
 				return nil
 			}
 		}
-		fe := fm.Schema.VendorExtensible.Extensions["x-kustomize"]
+		fe := fm.Schema.Extensions["x-kustomize"]
 		if fe == nil {
 			return nil
 		}

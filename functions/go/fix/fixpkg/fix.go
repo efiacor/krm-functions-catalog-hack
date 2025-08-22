@@ -121,7 +121,7 @@ func (s *Fix) Filter(nodes []*yaml.RNode) ([]*yaml.RNode, error) {
 	}
 
 	if !kfFound {
-		return nodes, fmt.Errorf("Kptfile not found in directory tree, make sure you specify '--include-meta-resources' flag")
+		return nodes, fmt.Errorf("kptfile not found in directory tree, make sure you specify '--include-meta-resources' flag")
 	}
 
 	// add all the newly created setter configs
@@ -281,7 +281,7 @@ func (s *Fix) FixKptfile(node *yaml.RNode, functions []v1.Function) (*yaml.RNode
 		// is the best practice
 		if kf.Pipeline != nil {
 			for i, fn := range kf.Pipeline.Mutators {
-				if strings.Contains(fn.Image, "gcr.io/kpt-fn/apply-setters:") && len(fn.ConfigMap) > 0 {
+				if strings.Contains(fn.Image, "ghcr.io/kptdev/krm-functions-catalog/apply-setters:") && len(fn.ConfigMap) > 0 {
 					settersConfig, err := SettersNodeFromSetters(kf.Pipeline.Mutators[0].ConfigMap, settersConfigFilePath)
 					if err != nil {
 						return node, err
@@ -395,7 +395,7 @@ func (s *Fix) FixKptfile(node *yaml.RNode, functions []v1.Function) (*yaml.RNode
 
 	if len(setters) > 0 {
 		fn := v1.Function{
-			Image:      "gcr.io/kpt-fn/apply-setters:v0.2",
+			Image:      "ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2",
 			ConfigPath: SettersConfigFileName,
 		}
 		settersConfig, err := SettersNodeFromSetters(setters, settersConfigFilePath)

@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/set-labels
+image: ghcr.io/kptdev/krm-functions-catalog/set-labels
 description: Add a list of labels to all resources.
 tags:
   - mutator

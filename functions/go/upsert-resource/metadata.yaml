@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/upsert-resource
+image: ghcr.io/kptdev/krm-functions-catalog/upsert-resource
 description: Insert a resource, or if the resource already exists, update the existing resource.
 tags:
   - mutator

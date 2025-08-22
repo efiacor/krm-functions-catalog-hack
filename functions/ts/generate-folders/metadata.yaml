@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/generate-folders
+image: ghcr.io/kptdev/krm-functions-catalog/generate-folders
 description: Transform the ResourceHierarchy custom resource into Folder custom resources constituting the hierarchy.
 tags:
   - mutator

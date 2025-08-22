@@ -85,7 +85,7 @@ openAPI:
 Invoke `fix` function on the package:
 
 ```shell
-$ kpt fn eval --image gcr.io/kpt-fn/fix:unstable --include-meta-resources
+$ kpt fn eval --image ghcr.io/kptdev/krm-functions-catalog/fix:unstable --include-meta-resources
 ```
 
 Here is the transformed resource
@@ -108,7 +108,7 @@ metadata:
   name: nginx
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configMap:
         replicas: "3"
 ```

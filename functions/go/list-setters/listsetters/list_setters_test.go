@@ -41,7 +41,7 @@ metadata:
   name: test
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configMap:
         app: my-app
 `, "test.yaml": `apiVersion: v1
@@ -87,7 +87,7 @@ metadata:
   name: test
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/foo:v0.1
+    - image: ghcr.io/kptdev/krm-functions-catalog/foo:v0.1
       configMap:
         app: my-app
 `, "test.yaml": `apiVersion: v1
@@ -132,7 +132,7 @@ metadata:
   name: test
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
 `, "test.yaml": `apiVersion: v1
 kind: Service
 metadata:
@@ -155,7 +155,7 @@ metadata:
   name: test
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configPath: setters.yaml
 `, "test.yaml": `apiVersion: v1
 kind: Service
@@ -179,7 +179,7 @@ metadata:
   name: test
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configMap:
         app: my-app
         foo: bar
@@ -205,11 +205,11 @@ metadata:
   name: test
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configMap:
         app: my-app-old
         foo: bar
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configMap:
         app: my-app
         baz: qux
@@ -249,7 +249,7 @@ metadata:
   name: test
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configPath: setters.yaml
 `, "setters.yaml": `apiVersion: v1
 kind: ConfigMap
@@ -278,9 +278,9 @@ metadata:
   name: test
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configPath: setters.yaml
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configMap:
         baz: qux
 `, "setters.yaml": `apiVersion: v1
@@ -341,7 +341,7 @@ metadata:
   name: project-package
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configPath: setters.yaml
 `, "setters.yaml": `apiVersion: v1
 kind: ConfigMap
@@ -392,7 +392,7 @@ metadata:
   name: vpc-package
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configPath: setters.yaml
 `},
 			expectedResult: []*Result{
@@ -482,6 +482,7 @@ spec:
 		t.Run(test.name, func(t *testing.T) {
 			require := require.New(t)
 			pkgDir := setupInputs(t, test.resourceMap)
+			//nolint:errcheck
 			defer os.RemoveAll(pkgDir)
 
 			ls := New()

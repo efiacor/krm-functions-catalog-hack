@@ -1,5 +1,5 @@
 testType: eval
-image: gcr.io/kpt-fn/set-annotations:unstable
+image: ghcr.io/kptdev/krm-functions-catalog/set-annotations:unstable
 args:
   color: orange
   fruit: apple

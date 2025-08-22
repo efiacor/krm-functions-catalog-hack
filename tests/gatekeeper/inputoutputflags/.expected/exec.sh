@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker run --rm -v "$(pwd)"/resources:/resources gcr.io/kpt-fn/gatekeeper:unstable --input resources/resources.yaml --output resources/resources.yaml
+docker run --rm -v "$(pwd)"/resources:/resources ghcr.io/kptdev/krm-functions-catalog/gatekeeper:unstable --input resources/resources.yaml --output resources/resources.yaml

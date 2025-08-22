@@ -31,7 +31,7 @@ info:
     Config Connector.
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.1
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.1
       configPath: setters.yaml
 ---
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
@@ -148,7 +148,7 @@ info:
     Config Connector.
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.1
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.1
       configPath: setters.yaml
 ---
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
@@ -319,7 +319,7 @@ info:
     Config Connector.
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.1
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.1
       configPath: setters.yaml
 ---
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
@@ -641,7 +641,7 @@ info:
     Config Connector.
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.1
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.1
       configPath: setters.yaml
 ---
 apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1

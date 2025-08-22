@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/fix
+image: ghcr.io/kptdev/krm-functions-catalog/fix
 description: Migrate resources to make them compatible with 1.0+ versions of kpt.
 tags:
   - mutator

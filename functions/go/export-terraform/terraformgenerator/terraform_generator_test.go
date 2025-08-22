@@ -95,6 +95,7 @@ func TestTerraformGeneration(t *testing.T) {
 
 				// round-trip to disk to make sure all annotations are consistent
 				tmpDir, err := os.MkdirTemp("", "export-terraform-test-*")
+				//nolint:errcheck
 				defer os.RemoveAll(tmpDir)
 				require.NoError(err)
 				err = testutil.ResourceListToDirectory(tempRL, tmpDir)
@@ -142,6 +143,7 @@ func TestTerraformGeneration(t *testing.T) {
 			// The workaround is that we read the resource files as a ResourceList and
 			// then compare this ResourceList with the expected ResourceList.
 			tmpDir, err := os.MkdirTemp("", "export-terraform-test-*")
+			//nolint:errcheck
 			defer os.RemoveAll(tmpDir)
 			require.NoError(err)
 			err = testutil.ResourceListToDirectory(actualRL, tmpDir)

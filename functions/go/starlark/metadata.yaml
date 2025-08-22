@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/starlark
+image: ghcr.io/kptdev/krm-functions-catalog/starlark
 description: Run a Starlark script to mutate or validate resources.
 tags:
   - mutator

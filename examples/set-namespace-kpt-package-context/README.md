@@ -32,7 +32,7 @@ metadata:
   name: example
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/set-namespace:unstable
+    - image: ghcr.io/kptdev/krm-functions-catalog/set-namespace:unstable
       configPath: package-context.yaml
 ```
 

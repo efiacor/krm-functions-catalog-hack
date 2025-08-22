@@ -14,7 +14,7 @@ metadata:
   name: example
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/set-image:unstable
+    - image: ghcr.io/kptdev/krm-functions-catalog/set-image:unstable
       configPath: fn-config.yaml
 ```
 

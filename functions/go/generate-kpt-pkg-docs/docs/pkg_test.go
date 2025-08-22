@@ -29,10 +29,10 @@ info:
     resources in a specific project.
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.1
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.1
       configPath: setters.yaml
   validators:
-    - image: gcr.io/kpt-fn/starlark:v0.3
+    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.3
       configPath: validation.yaml`,
 			want: []string{"setters.yaml", "validation.yaml"},
 		},
@@ -67,11 +67,11 @@ info:
     resources in a specific project.
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.1
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.1
       configMap:
         foo: bar
   validators:
-    - image: gcr.io/kpt-fn/starlark:v0.3
+    - image: ghcr.io/kptdev/krm-functions-catalog/starlark:v0.3
       configPath: validation.yaml`,
 			want: []string{"validation.yaml"},
 		},

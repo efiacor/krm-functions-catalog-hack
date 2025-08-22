@@ -22,7 +22,7 @@ metadata:
   name: example
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/ensure-name-substring:unstable
+    - image: ghcr.io/kptdev/krm-functions-catalog/ensure-name-substring:unstable
       configPath: fn-config.yaml
 ```
 

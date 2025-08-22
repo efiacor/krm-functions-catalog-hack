@@ -680,6 +680,7 @@ metadata:
 		t.Run(tt.name, func(t *testing.T) {
 			require := require.New(t)
 			pkgDir := setupInputs(t, tt.resourceMap)
+			//nolint:errcheck
 			defer os.RemoveAll(pkgDir)
 			pslr := ProjectServiceSetRunner{}
 			in := &kio.LocalPackageReader{

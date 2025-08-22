@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/gatekeeper
+image: ghcr.io/kptdev/krm-functions-catalog/gatekeeper
 description: Validate the KRM resources using Gatekeeper policies.
 tags:
   - validator

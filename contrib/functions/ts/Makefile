@@ -14,7 +14,7 @@
 # limitations under the License.
 SHELL=/bin/bash
 TAG ?= unstable
-GCR = gcr.io/kpt-fn-contrib
+CR = ghcr.io/kptdev/krm-functions-catalog/krm-fn-contrib
 GOBIN := $(shell go env GOPATH)/bin
 
 .DEFAULT_GOAL := help
@@ -58,13 +58,13 @@ build: $(FUNCTION_BUILDS) ## Build all function images. Variable 'TAG' is used t
 
 .PHONY: $(FUNCTION_BUILDS)
 $(FUNCTION_BUILDS):
-	$(MAKE) CURRENT_FUNCTION=$(subst -BUILD,,$@) TAG=$(TAG) DEFAULT_GCR=$(GCR) func-build
+	$(MAKE) CURRENT_FUNCTION=$(subst -BUILD,,$@) TAG=$(TAG) DEFAULT_CR=$(CR) func-build
 
 push: $(FUNCTION_PUSH) ## Push images to registry. WARN: This operation should only be done in CI environment.
 
 .PHONY: $(FUNCTION_PUSH)
 $(FUNCTION_PUSH):
-	$(MAKE) CURRENT_FUNCTION=$(subst -PUSH,,$@) TAG=$(TAG) DEFAULT_GCR=$(GCR) func-push
+	$(MAKE) CURRENT_FUNCTION=$(subst -PUSH,,$@) TAG=$(TAG) DEFAULT_CR=$(CR) func-push
 
 check-licenses: $(FUNCTION_CHECKLICENSES) ## Run license checker for source files
 
