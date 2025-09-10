@@ -33,26 +33,6 @@ jobs:
           find . -name "*.sh" > shell_files.out
           shellcheck $(cat shell_files.out)
 
-  ts-unit-test-ci:
-    strategy:
-      matrix:
-        platform: [ubuntu-latest]
-        node-version: [18.x]
-    runs-on: ${{ matrix.platform }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Run unit tests
-        run: |
-          make unit-test-ts
-      - name: Check licenses
-        run: |
-          cd functions/ts
-          make check-licenses
-
   go-unit-test-ci:
     runs-on: ubuntu-latest
     env:

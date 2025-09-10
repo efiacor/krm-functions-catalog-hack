@@ -13,6 +13,7 @@ import (
 func TestFixV1alpha1ToV1(t *testing.T) {
 	dir, err := os.MkdirTemp("", "")
 	assert.NoError(t, err)
+	//nolint:errcheck
 	defer os.RemoveAll(dir)
 	err = copyutil.CopyDir("../../../../testdata/fix/nginx-v1alpha1", dir)
 	assert.NoError(t, err)
@@ -37,9 +38,9 @@ func TestFixV1alpha1ToV1(t *testing.T) {
 - filepath: Kptfile
   message: Transformed "upstream" to "upstream" and "upstreamLock"
 - filepath: Kptfile
-  message: Added "gcr.io/kpt-fn/set-annotations:v0.1" to mutators list, please move it to validators section if it is a validator function
+  message: Added "ghcr.io/kptdev/krm-functions-catalog/set-annotations:v0.1" to mutators list, please move it to validators section if it is a validator function
 - filepath: Kptfile
-  message: Added "gcr.io/kpt-fn/set-labels:v0.1" to mutators list, please move it to validators section if it is a validator function
+  message: Added "ghcr.io/kptdev/krm-functions-catalog/set-labels:v0.1" to mutators list, please move it to validators section if it is a validator function
 - filepath: Kptfile
   message: Transformed "openAPI" definitions to "apply-setters" function
 - filepath: hello-world/Kptfile
@@ -47,9 +48,9 @@ func TestFixV1alpha1ToV1(t *testing.T) {
 - filepath: hello-world/Kptfile
   message: Transformed "upstream" to "upstream" and "upstreamLock"
 - filepath: hello-world/Kptfile
-  message: Added "gcr.io/kpt-fn/set-annotations:v0.1" to mutators list, please move it to validators section if it is a validator function
+  message: Added "ghcr.io/kptdev/krm-functions-catalog/set-annotations:v0.1" to mutators list, please move it to validators section if it is a validator function
 - filepath: hello-world/Kptfile
-  message: Added "gcr.io/kpt-fn/set-namespace:v0.1" to mutators list, please move it to validators section if it is a validator function
+  message: Added "ghcr.io/kptdev/krm-functions-catalog/set-namespace:v0.1" to mutators list, please move it to validators section if it is a validator function
 - filepath: hello-world/Kptfile
   message: Transformed "openAPI" definitions to "apply-setters" function
 `, string(results))
@@ -58,6 +59,7 @@ func TestFixV1alpha1ToV1(t *testing.T) {
 func TestFixV1alpha2ToV1(t *testing.T) {
 	dir, err := os.MkdirTemp("", "")
 	assert.NoError(t, err)
+	//nolint:errcheck
 	defer os.RemoveAll(dir)
 	err = copyutil.CopyDir("../../../../testdata/fix/nginx-v1alpha2", dir)
 	assert.NoError(t, err)

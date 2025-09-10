@@ -441,12 +441,14 @@ roles: # kpt-set: ${roles}
 			if !assert.NoError(t, err) {
 				t.FailNow()
 			}
+			//nolint:errcheck
 			defer os.RemoveAll(baseDir)
 
 			r, err := os.CreateTemp(baseDir, "k8s-cli-*.yaml")
 			if !assert.NoError(t, err) {
 				t.FailNow()
 			}
+			//nolint:errcheck
 			defer os.Remove(r.Name())
 			err = os.WriteFile(r.Name(), []byte(test.input), 0600)
 			if !assert.NoError(t, err) {

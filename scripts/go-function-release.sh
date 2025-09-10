@@ -18,20 +18,20 @@
 # CURRENT_FUNCTION is the target kpt function. e.g. set-namespace.
 # TAG can be any valid docker tags. If the TAG is semver e.g. v1.2.3, shorter
 # version of this semver will be tagged too. e.g. v1.2 and v1.
-# DEFAULT_GCR is the desired container registry e.g. gcr.io/kpt-fn. This is
-# optional. If not set, the default value gcr.io/kpt-fn-contrib will be used.
-# If GCR_REGISTRY is set, it will override DEFAULT_GCR.
+# DEFAULT_CR is the desired container registry e.g. ghcr.io/kptdev/krm-functions-catalog. This is
+# optional. If not set, the default value ghcr.io/kptdev/krm-functions-catalog/krm-fn-contrib will be used.
+# If CR_REGISTRY is set, it will override DEFAULT_CR.
 # example 1:
-# Invocation: DEFAULT_GCR=gcr.io/kpt-fn CURRENT_FUNCTION=set-namespace TAG=v1.2.3 go-function-release.sh build
-# It builds gcr.io/kpt-fn/set-namespace:v1.2.3, gcr.io/kpt-fn/set-namespace:v1.2
-# and gcr.io/kpt-fn/set-namespace:v1.
-# Invocation: DEFAULT_GCR=gcr.io/kpt-fn CURRENT_FUNCTION=set-namespace TAG=v1.2.3 go-function-release.sh push
+# Invocation: DEFAULT_CR=ghcr.io/kptdev/krm-functions-catalog CURRENT_FUNCTION=set-namespace TAG=v1.2.3 go-function-release.sh build
+# It builds ghcr.io/kptdev/krm-functions-catalog/set-namespace:v1.2.3, ghcr.io/kptdev/krm-functions-catalog/set-namespace:v1.2
+# and ghcr.io/kptdev/krm-functions-catalog/set-namespace:v1.
+# Invocation: DEFAULT_CR=ghcr.io/kptdev/krm-functions-catalog CURRENT_FUNCTION=set-namespace TAG=v1.2.3 go-function-release.sh push
 # It pushes the above 3 images.
 # example 2:
 # Invocation: CURRENT_FUNCTION=set-namespace TAG=unstable go-function-release.sh build
-# It builds gcr.io/kpt-fn/set-namespace:unstable.
+# It builds ghcr.io/kptdev/krm-functions-catalog/set-namespace:unstable.
 # Invocation: CURRENT_FUNCTION=set-namespace TAG=unstable go-function-release.sh push
-# It pushes gcr.io/kpt-fn/set-namespace:unstable.
+# It pushes ghcr.io/kptdev/krm-functions-catalog/set-namespace:unstable.
 
 # This script currently is used in functions/go/Makefile.
 
@@ -44,20 +44,35 @@ source "${scripts_dir}"/git-tag-parser.sh
 # shellcheck source=/dev/null
 source "${scripts_dir}"/docker.sh
 
-versions=$(get_versions "${TAG}")
+# Initialize array to hold all versions
+version_array=()
 
-FUNCTION_TYPE="$2"
+# Split TAG by commas
+IFS=',' read -ra tags <<< "$TAG"
+
+# Process each tag
+for tag in "${tags[@]}"; do
+    # Get versions for this tag
+    versions=$(get_versions "$tag")
+    
+    # Split newline-separated versions and add to all_versions array
+    while IFS= read -r version; do
+        version_array+=("$version")
+    done <<< "$versions"
+done
+
+FUNCTION_TYPE="${2:-curated}"
 EXTRA_BUILD_ARGS="${EXTRA_BUILD_ARGS:-}"
 
 case "$1" in
   build)
-    for version in ${versions}; do
+    for version in "${version_array[@]}"; do
       docker_build "load" "${FUNCTION_TYPE}" "go" "${CURRENT_FUNCTION}" "${version}" "${EXTRA_BUILD_ARGS}"
     done
     ;;
   push)
-    for version in ${versions}; do
-      docker_build "push" "${FUNCTION_TYPE}" "go" "${CURRENT_FUNCTION}" "${version}"
+    for version in "${version_array[@]}"; do
+      docker_build "push" "${FUNCTION_TYPE}" "go" "${CURRENT_FUNCTION}" "${version}" "${EXTRA_BUILD_ARGS}"
     done
     ;;
   *)

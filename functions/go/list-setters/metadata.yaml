@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/list-setters
+image: ghcr.io/kptdev/krm-functions-catalog/list-setters
 description: List setters on resource fields.
 tags:
   - viewer

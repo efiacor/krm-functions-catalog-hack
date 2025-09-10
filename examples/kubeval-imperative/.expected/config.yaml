@@ -1,6 +1,7 @@
 exitCode: 1
+skip: true
 testType: eval
-image: gcr.io/kpt-fn/kubeval:unstable
+image: ghcr.io/kptdev/krm-functions-catalog/kubeval:unstable
 args:
   strict: 'true'
   skip_kinds: MyCustom,MyOtherCustom

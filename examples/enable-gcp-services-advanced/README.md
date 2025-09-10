@@ -41,8 +41,8 @@ $ kpt fn render enable-gcp-services-advanced
 
 ```shell
 Package "enable-gcp-services-advanced": 
-[RUNNING] "gcr.io/kpt-fn/enable-gcp-services:unstable"
-[PASS] "gcr.io/kpt-fn/enable-gcp-services:unstable"
+[RUNNING] "ghcr.io/kptdev/krm-functions-catalog/enable-gcp-services:unstable"
+[PASS] "ghcr.io/kptdev/krm-functions-catalog/enable-gcp-services:unstable"
   Results:
     [INFO] pruned service in object "serviceusage.cnrm.cloud.google.com/v1beta1/Service/proj1-service-bigquery" in file "service_proj1-service-bigquery.yaml"
     [INFO] recreated service in object "serviceusage.cnrm.cloud.google.com/v1beta1/Service/proj1-service-compute" in file "service_proj1-service-compute.yaml"

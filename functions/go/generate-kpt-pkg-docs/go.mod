@@ -4,13 +4,11 @@ go 1.24.3
 
 require (
 	github.com/GoogleContainerTools/kpt-functions-sdk/go v0.0.0-20211015223526-2e6d9522928b
-	github.com/kptdev/krm-functions-catalog/functions/go/list-setters v0.0.0-00010101000000-000000000000
+	github.com/kptdev/krm-functions-catalog/functions/go/list-setters v0.0.0-20250607093627-15a1383906ae
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/stretchr/testify v1.7.0
 	sigs.k8s.io/kustomize/kyaml v0.13.0
 )
-
-replace github.com/kptdev/krm-functions-catalog/functions/go/list-setters => ../list-setters
 
 require (
 	github.com/PuerkitoBio/purell v1.1.1 // indirect

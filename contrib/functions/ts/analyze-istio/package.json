@@ -37,7 +37,7 @@
     "typescript": "~4.3.5"
   },
   "kpt": {
-    "docker_repo_base": "gcr.io/kpt-fn-contrib"
+    "docker_repo_base": "gcr.io/krm-fn-contrib"
   },
   "repository": {
     "type": "git"

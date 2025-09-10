@@ -82,7 +82,7 @@ info:
   description: describe this package
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configPath: setters.yaml
 ```
 
@@ -93,7 +93,7 @@ The transformed package is compatible with kpt 1.0 binary.
 Invoke the function by running the following commands:
 
 ```shell
-$ kpt fn eval fix-simple --image gcr.io/kpt-fn/fix:unstable --include-meta-resources
+$ kpt fn eval fix-simple --image ghcr.io/kptdev/krm-functions-catalog/fix:unstable --include-meta-resources
 ```
 
 ### Expected result

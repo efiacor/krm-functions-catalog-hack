@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/apply-replacements
+image: ghcr.io/kptdev/krm-functions-catalog/apply-replacements
 description: Invoke the kustomize replacements feature as a KRM function.
 tags:
   - mutator

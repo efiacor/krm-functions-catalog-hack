@@ -17,9 +17,9 @@
 # GIT_TAG should be set in format as
 # functions/{language_name}/{function_name}/{semver}.
 # e.g. "functions/go/set-namespace/v1.2.3" and "functions/ts/kubeval/v2.3.4"
-# You can optionally set environment variable GCR_REGISTRY
-# (e.g. "gcr.io/my-project"), then your image will be built as
-# {GCR_REGISTRY}/{function_name}:{tag}.
+# You can optionally set environment variable CR_REGISTRY
+# (e.g. "ghcr.io/my-project"), then your image will be built as
+# {CR_REGISTRY}/{function_name}:{tag}.
 
 set -euo pipefail
 
@@ -43,7 +43,7 @@ if [ -d "${scripts_dir}/../functions/${fn_lang}/${fn_name}" ]; then
   if [ "${fn_lang}" == "go" ]; then
     make install-mdtogo
   fi
-  DEFAULT_GCR="${DEFAULT_GCR:=gcr.io/kpt-fn}"
+  DEFAULT_CR="${DEFAULT_CR:=ghcr.io/kptdev/krm-functions-catalog}"
 fi
 
 if [ -d "${scripts_dir}/../contrib/functions/${fn_lang}/${fn_name}" ]; then
@@ -51,15 +51,15 @@ if [ -d "${scripts_dir}/../contrib/functions/${fn_lang}/${fn_name}" ]; then
   if [ "${fn_lang}" == "go" ]; then
     make install-mdtogo
   fi
-  DEFAULT_GCR="${DEFAULT_GCR:=gcr.io/kpt-fn-contrib}"
+  DEFAULT_CR="${DEFAULT_CR:=ghcr.io/kptdev/krm-functions-catalog/krm-fn-contrib}"
 fi
 
 case "$1" in
   build)
-    CURRENT_FUNCTION="${fn_name}" TAG="${fn_ver}" DEFAULT_GCR="$DEFAULT_GCR" make func-build
+    CURRENT_FUNCTION="${fn_name}" TAG="${fn_ver}" DEFAULT_CR="$DEFAULT_CR" make func-build
     ;;
   push)
-    CURRENT_FUNCTION="${fn_name}" TAG="${fn_ver}" DEFAULT_GCR="$DEFAULT_GCR" make func-push
+    CURRENT_FUNCTION="${fn_name}" TAG="${fn_ver}" DEFAULT_CR="$DEFAULT_CR" make func-push
     ;;
   *)
     echo "Usage: $0 {build|push}"

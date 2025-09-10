@@ -17,8 +17,7 @@
 
 repo_base=$(cd "$(dirname "$(dirname "$0")")" || exit ; pwd)
 
-DEFAULT_GCR=${DEFAULT_GCR:-gcr.io/kpt-fn-contrib}
-GCR_REGISTRY=${GCR_REGISTRY:-${DEFAULT_GCR}}
+CR_REGISTRY=${DEFAULT_CR:-ghcr.io/kptdev/krm-functions-catalog/krm-fn-contrib}
 
 function err {
   echo "$1"
@@ -53,6 +52,8 @@ function docker_build {
   [[ -f "${override_dockerfile}" ]] && dockerfile="${override_dockerfile}"
   [[ -f "${dockerfile}" ]] || err "Dockerfile does not exist: ${dockerfile}"
 
+  echo "Using Dockerfile ${dockerfile}" 
+
   defaults="${repo_base}/build/docker/${lang}/defaults.env"
   [[ -f "${defaults}" ]] || err "defaults file does not exist: ${defaults}"
   # shellcheck source=/dev/null
@@ -60,26 +61,33 @@ function docker_build {
   build_args+=(--build-arg "BUILDER_IMAGE=${BUILDER_IMAGE}")
   build_args+=(--build-arg "BASE_IMAGE=${BASE_IMAGE}")
 
-  echo "building ${GCR_REGISTRY}/${name}:${tag}"
+  if [[ ! -f "${function_dir}/go.mod" ]]; then
+    function_dir="${repo_base}/functions/${lang}/"
+    echo "Setting build context to ${function_dir}"
+  fi
+
+  echo "building ${CR_REGISTRY}/${name}:${tag}"
 
   case "${action}" in
     load)
       IFS=' ' read -r -a extra_args_array <<< "${EXTRA_BUILD_ARGS:-}"
       # Use + conditional parameter expansion to protect from unbound array variable
       docker buildx build --load \
-        -t "${GCR_REGISTRY}/${name}:${tag}" \
+        -t "${CR_REGISTRY}/${name}:${tag}" \
         -f "${dockerfile}" \
         "${build_args[@]+"${build_args[@]}"}" \
         "${extra_args_array[@]}" \
         "${function_dir}"    
       ;;
     push)
+      IFS=' ' read -r -a extra_args_array <<< "${EXTRA_BUILD_ARGS:-}"
       # build and push multi-arch image.
       docker buildx build --push \
-        -t "${GCR_REGISTRY}/${name}:${tag}" \
+        -t "${CR_REGISTRY}/${name}:${tag}" \
         -f "${dockerfile}" \
         --platform "linux/amd64,linux/arm64" \
         "${build_args[@]+"${build_args[@]}"}" \
+        "${extra_args_array[@]}" \
         "${function_dir}"    
       ;;
     *)

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-image: gcr.io/kpt-fn/export-terraform
+image: ghcr.io/kptdev/krm-functions-catalog/export-terraform
 description: Exports Terraform equivalents for supported resources
 tags:
   - mutator

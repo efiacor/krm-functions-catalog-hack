@@ -18,7 +18,7 @@ if they are not already set.
 set-project-id function is expected to be executed imperatively like:
 
 ```shell
-kpt fn eval --include-meta-resources --image gcr.io/kpt-fn/set-project-id:unstable -- 'project-id=foo'
+kpt fn eval --include-meta-resources --image ghcr.io/kptdev/krm-functions-catalog/set-project-id:unstable -- 'project-id=foo'
 ```
 
 The `set-project-id` function does the following:
@@ -63,7 +63,7 @@ metadata:
 Invoke the function:
 
 ```shell
-kpt fn eval --include-meta-resources --image gcr.io/kpt-fn/set-project-id:unstable -- 'project-id=foo'
+kpt fn eval --include-meta-resources --image ghcr.io/kptdev/krm-functions-catalog/set-project-id:unstable -- 'project-id=foo'
 ```
 
 Kptfile will be updated to the following:
@@ -75,7 +75,7 @@ metadata:
   name: example-package
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-setters:v0.2
+    - image: ghcr.io/kptdev/krm-functions-catalog/apply-setters:v0.2
       configMap:
         project-id: foo
 ```

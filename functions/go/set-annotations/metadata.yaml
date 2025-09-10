@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/set-annotations
+image: ghcr.io/kptdev/krm-functions-catalog/set-annotations
 description: Add a list of annotations to all resources.
 tags:
   - mutator

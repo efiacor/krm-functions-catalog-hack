@@ -28,7 +28,7 @@ generators:
       config.kubernetes.io/function: |
         container:
           network: true
-          image: gcr.io/kpt-fn/render-helm-chart:unstable
+          image: ghcr.io/kptdev/krm-functions-catalog/render-helm-chart:unstable
   helmCharts:
   - chartArgs:
       name: ocp-pipeline
@@ -74,7 +74,7 @@ generators:
       config.kubernetes.io/function: |
         container:
           network: true
-          image: gcr.io/kpt-fn/render-helm-chart:unstable
+          image: ghcr.io/kptdev/krm-functions-catalog/render-helm-chart:unstable
           mounts:
             - type: bind
               src: ./file1.yaml

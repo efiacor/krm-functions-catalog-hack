@@ -548,6 +548,7 @@ spec:
 			if !assert.NoError(t, err) {
 				t.FailNow()
 			}
+			//nolint:errcheck
 			defer os.RemoveAll(baseDir)
 
 			err = os.WriteFile(filepath.Join(baseDir, "f1.yaml"), []byte(test.input), 0700)

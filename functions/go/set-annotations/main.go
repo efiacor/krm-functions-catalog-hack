@@ -57,7 +57,7 @@ type setAnnotationFunction struct {
 func (f *setAnnotationFunction) Config(rn *kyaml.RNode) error {
 	switch {
 	case f.validGVK(rn, "v1", "ConfigMap"):
-		f.plugin.Annotations = rn.GetDataMap()
+		f.Annotations = rn.GetDataMap()
 	case f.validGVK(rn, fnConfigAPIVersion, legacyFnConfigKind):
 		fallthrough
 	case f.validGVK(rn, fnConfigAPIVersion, fnConfigKind):
@@ -74,7 +74,7 @@ func (f *setAnnotationFunction) Config(rn *kyaml.RNode) error {
 		return fmt.Errorf("`functionConfig` must be a `ConfigMap` or `%s`", fnConfigKind)
 	}
 
-	if len(f.plugin.Annotations) == 0 {
+	if len(f.Annotations) == 0 {
 		return fmt.Errorf("input annotation list cannot be empty")
 	}
 	tc, err := getDefaultConfig()
@@ -82,7 +82,7 @@ func (f *setAnnotationFunction) Config(rn *kyaml.RNode) error {
 		return err
 	}
 	// append default field specs
-	f.plugin.AdditionalAnnotationFields = append(f.plugin.AdditionalAnnotationFields, tc.FieldSpecs...)
+	f.AdditionalAnnotationFields = append(f.AdditionalAnnotationFields, tc.FieldSpecs...)
 	return nil
 }
 
@@ -92,7 +92,7 @@ func (f *setAnnotationFunction) Run(items []*kyaml.RNode) ([]*kyaml.RNode, error
 	if err != nil {
 		return nil, err
 	}
-	err = f.plugin.Transform(resMap)
+	err = f.Transform(resMap)
 	if err != nil {
 		return nil, fmt.Errorf("failed to run transformer: %w", err)
 	}
@@ -114,13 +114,13 @@ func (f *setAnnotationFunction) validGVK(rn *kyaml.RNode, apiVersion, kind strin
 // equivalent framework.Results
 func (f *setAnnotationFunction) resultsToItems() (framework.Results, error) {
 	var results framework.Results
-	if len(f.plugin.Results) == 0 {
+	if len(f.Results) == 0 {
 		results = append(results, &framework.Result{
 			Message: "no annotations applied",
 		})
 		return results, nil
 	}
-	for resKey, annoVals := range f.plugin.Results {
+	for resKey, annoVals := range f.Results {
 		fileIndex, _ := strconv.Atoi(resKey.FileIndex)
 		annotationJson, err := json.Marshal(annoVals)
 		if err != nil {

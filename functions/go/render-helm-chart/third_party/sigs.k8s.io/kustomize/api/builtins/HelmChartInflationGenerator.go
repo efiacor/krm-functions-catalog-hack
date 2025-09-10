@@ -180,6 +180,7 @@ func (p *HelmChartInflationGeneratorPlugin) createNewMergedValuesFiles(path stri
 				if err != nil {
 					return "", err
 				}
+				//nolint:errcheck
 				defer resp.Body.Close()
 				pValues, err = io.ReadAll(resp.Body)
 				if err != nil {
@@ -248,10 +249,12 @@ func (p *HelmChartInflationGeneratorPlugin) writeValuesBytes(
 
 func (p *HelmChartInflationGeneratorPlugin) cleanup() {
 	if p.tmpDir != "" {
+		//nolint:errcheck
 		os.RemoveAll(p.tmpDir)
 	}
 	if isOciRepo(p.Repo) && p.password != "" {
 		// log out of the registry
+		//nolint:errcheck
 		p.runHelmCommand([]string{
 			"registry",
 			"logout",

@@ -345,7 +345,7 @@ func (ref *terraformResource) GetTerraformId(prefix ...bool) string {
 		return fmt.Sprintf("google_folder.%s.name", ref.GetResourceName())
 	}
 	hasVariable := ref.variable != nil
-	usePrefix := !(len(prefix) > 0 && !prefix[0])
+	usePrefix := len(prefix) == 0 || prefix[0]
 	isOrg := ref.Kind == "Organization"
 
 	switch {

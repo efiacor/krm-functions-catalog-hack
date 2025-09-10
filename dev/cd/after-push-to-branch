@@ -4,6 +4,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 if [ -z "${GIT_REF}" ]; then
   echo "GIT_REF must be set"
   exit 1
@@ -22,6 +24,7 @@ echo "REF is ${REF}"
 
 IMAGE_REPO=$(echo $IMAGE_REPO | tr '[:upper:]' '[:lower:]')
 echo "IMAGE_REPO is ${IMAGE_REPO}"
+export DEFAULT_CR=$IMAGE_REPO
 
 # We push two tags, <branchname>-latest and <branchname>-git-$GITSHA
 # The idea is that if you want the latest version from that branch,
@@ -41,7 +44,16 @@ echo "IMAGE_TAG is ${IMAGE_TAG}"
 find . -type f -name "krm-fn-metadata.yaml" -print0 | while IFS= read -r -d '' f; do
   dir=$(dirname "${f}")
   echo "directory: ${dir}"
+
+  # Skip if go.mod is not found in the directory
+  if [[ ! -f "${dir}/go.mod" ]]; then
+    echo "Skipping ${dir}, no go.mod found."
+    continue
+  fi
+
+  fn_name=$(basename "$dir")
   pushd "${dir}"
-    make push
+    CURRENT_FUNCTION="$fn_name" TAG="$IMAGE_TAG" \
+    "${SCRIPT_DIR}/../../scripts/go-function-release.sh" push
   popd
 done

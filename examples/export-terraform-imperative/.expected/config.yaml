@@ -1,2 +1,2 @@
 testType: eval
-image: gcr.io/kpt-fn/export-terraform:unstable
+image: ghcr.io/kptdev/krm-functions-catalog/export-terraform:unstable

@@ -152,7 +152,7 @@ func (ps *ProjectServiceSet) getServiceRNodes() ([]*yaml.RNode, error) {
 			return nil, err
 		}
 		// add annotations in ProjectServiceSet to each service
-		for k, v := range ps.ObjectMeta.Annotations {
+		for k, v := range ps.Annotations {
 			if ignoreAnnotation(k) {
 				continue
 			}
@@ -175,7 +175,7 @@ func (ps *ProjectServiceSet) getServiceRNodes() ([]*yaml.RNode, error) {
 		if err != nil {
 			return nil, err
 		}
-		serviceFilePath := kioutil.CreatePathAnnotationValue(path.Dir(ps.ObjectMeta.Annotations[kioutil.PathAnnotation]), svcMeta)
+		serviceFilePath := kioutil.CreatePathAnnotationValue(path.Dir(ps.Annotations[kioutil.PathAnnotation]), svcMeta)
 		if _, err := svc.Pipe(yaml.SetAnnotation(kioutil.PathAnnotation, serviceFilePath)); err != nil {
 			return nil, err
 		}

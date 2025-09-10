@@ -247,12 +247,12 @@ type Function struct {
 	// `Image` specifies the function container image.
 	// It can either be fully qualified, e.g.:
 	//
-	//	image: gcr.io/kpt-fn/set-label
+	//	image: ghcr.io/kptdev/krm-functions-catalog/set-label
 	//
 	// Optionally, kpt can be configured to use a image
 	// registry host-path that will be used to resolve the image path in case
 	// the image path is missing (Defaults to gcr.io/kpt-fn).
-	// e.g. The following resolves to gcr.io/kpt-fn/set-label:
+	// e.g. The following resolves to ghcr.io/kptdev/krm-functions-catalog/set-label:
 	//
 	//	image: set-label
 	Image string `yaml:"image,omitempty"`

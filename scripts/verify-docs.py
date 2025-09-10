@@ -42,8 +42,8 @@ fn_directories_to_skip = ['bind', 'inflate-helm-chart', 'set-gcp-resource-ids', 
 required_fields = ['image', 'description', 'tags', 'sourceURL', 'examplePackageURLs', 'emails', 'license']
 kpt_team_email = 'kpt-team@google.com'
 disallowed_kpt_commands = ['kpt fn run', 'kpt cfg', 'kpt pkg cat']
-gcr_prefix = 'gcr.io/kpt-fn/'
-gcr_contrib_prefix = 'gcr.io/kpt-fn-contrib/'
+ghcr_prefix = 'ghcr.io/kptdev/krm-functions-catalog/'
+ghcr_contrib_prefix = 'ghcr.io/kptdev/krm-functions-catalog/krm-fn-contrib/'
 git_url_prefix = 'https://github.com/kptdev/krm-functions-catalog.git'
 test_config_filename = 'config.yaml'
 exec_script_filename = 'exec.sh'
@@ -179,9 +179,9 @@ def validate_example_kptfile(fn_name, dir_name, example_name, branch, contrib):
         return
 
     if contrib:
-        desired_gcr_prefix = gcr_contrib_prefix
+        desired_ghcr_prefix = ghcr_contrib_prefix
     else:
-        desired_gcr_prefix = gcr_prefix
+        desired_ghcr_prefix = ghcr_prefix
     tag = branch
     if branch == 'master':
         tag = 'unstable'
@@ -204,13 +204,13 @@ def validate_example_kptfile(fn_name, dir_name, example_name, branch, contrib):
     if 'mutators' in pipeline:
         for mutator in pipeline['mutators']:
             actual_image = mutator['image']
-            desired_image_name = f'{desired_gcr_prefix}{fn_name}:{tag}'
+            desired_image_name = f'{desired_ghcr_prefix}{fn_name}:{tag}'
             if actual_image != desired_image_name:
                 raise Exception(f'expect Kptfile to contain {desired_image_name} but find {actual_image}')
     if 'validators' in pipeline:
         for mutator in pipeline['validators']:
             actual_image = mutator['image']
-            desired_image_name = f'{desired_gcr_prefix}{fn_name}:{tag}'
+            desired_image_name = f'{desired_ghcr_prefix}{fn_name}:{tag}'
             if actual_image != desired_image_name:
                 raise Exception(f'expect Kptfile to contain {desired_image_name} but find {actual_image}')
 
@@ -278,8 +278,8 @@ def validate_example_md(fn_name, dir_name, example_name, branch):
                 if not item.startswith(desired_pkg_url):
                     raise Exception(f'the desired package url in {md_file_path} is {desired_pkg_url}, but found {item}')
 
-            if gcr_prefix in item:
-                desired_image_name = f'{gcr_prefix}{fn_name}:{tag}'
+            if ghcr_prefix in item:
+                desired_image_name = f'{ghcr_prefix}{fn_name}:{tag}'
                 if desired_image_name not in item:
                     raise Exception(f'expect "{line}" to contain "{desired_image_name}" in {md_file_path}')
 
@@ -289,9 +289,9 @@ def validate_metadata(metadata, branch, path, fn, examples_list, contrib):
         if required_field not in metadata:
             raise Exception(f'{fn}: field {required_field} is required')
     if contrib:
-        desired_image_name = gcr_contrib_prefix + fn
+        desired_image_name = ghcr_contrib_prefix + fn
     else:
-        desired_image_name = gcr_prefix + fn
+        desired_image_name = ghcr_prefix + fn
     if metadata['image'] != desired_image_name:
         raise Exception(f'{fn}: image name should be "{desired_image_name}"')
     if metadata['tags'] is None or len(metadata['tags']) == 0:

@@ -13,15 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Run the CD script after pushes to branches
+name: Build and push latest curated images
 on:
   push:
     branches:
     - "master"
 
 jobs:
-  build:
-    name: after-push-to-branch
+  build-push-curated:
+    name: Build and push latest curated images
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -30,8 +30,29 @@ jobs:
     - uses: actions/setup-go@v5
       with:
         go-version: '1.24.3'
-    - run: go version
-    - name: dev/cd/after-branch-push
-      run: GIT_REF=${GITHUB_REF} IMAGE_REPO=ghcr.io/${{ github.repository }} dev/cd/after-push-to-branch
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: docker/setup-qemu-action@v3
+    - uses: docker/setup-buildx-action@v3
+    - name: Log in to GHCR
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: Push latest and github-ref images
+      run: |
+        SHORT_SHA=$(git rev-parse --short HEAD)
+        make push-curated TAG=latest,$SHORT_SHA DEFAULT_CR=ghcr.io/${{ github.repository }}
+  build-push-contrib:
+    name: Build and push latest contrib images
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-go@v5
+      with:
+        go-version: '1.24.3'
+    - uses: docker/setup-qemu-action@v3
+    - uses: docker/setup-buildx-action@v3
+    - name: Log in to GHCR
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: Push latest and github-ref images
+      run: |
+        SHORT_SHA=$(git rev-parse --short HEAD)
+        make push-contrib TAG=latest,$SHORT_SHA DEFAULT_CONTRIB_CR=ghcr.io/${{ github.repository }}/krm-fn-contrib

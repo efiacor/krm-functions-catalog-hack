@@ -39,7 +39,7 @@ $ openapi2jsonschema --stand-alone --expanded --kubernetes -o jsonschema path/to
 We can invoke function with the following command:
 
 ```shell
-$ kpt fn eval kubeval-mount-schema -i gcr.io/kpt-fn/kubeval:unstable --results-dir /tmp \
+$ kpt fn eval kubeval-mount-schema -i ghcr.io/kptdev/krm-functions-catalog/kubeval:unstable --results-dir /tmp \
   --mount type=bind,src="$(pwd)/kubeval-mount-schema/jsonschema",dst=/schema-dir/master-standalone \
   -- schema_location=file:///schema-dir
 ```
@@ -61,7 +61,7 @@ metadata:
   name: fnresults
 exitCode: 1
 items:
-  - image: gcr.io/kpt-fn/kubeval:unstable
+  - image: ghcr.io/kptdev/krm-functions-catalog/kubeval:unstable
     exitCode: 1
     results:
       - message: 'Invalid type. Expected: [integer,null], given: string'

@@ -16,7 +16,7 @@ func runAnnotationTransformerE(config, input string) (string, error) {
 		return "", err
 	}
 
-	var plugin *plugin = &KustomizePlugin
+	var plugin = &KustomizePlugin
 	plugin.Results = nil
 	err = plugin.Config(nil, []byte(config))
 	if err != nil {

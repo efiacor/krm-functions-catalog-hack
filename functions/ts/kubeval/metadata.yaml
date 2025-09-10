@@ -1,4 +1,4 @@
-image: gcr.io/kpt-fn/kubeval
+image: ghcr.io/kptdev/krm-functions-catalog/kubeval
 description: Use kubeval to validate KRM resources against their json schemas.
 tags:
   - validator

@@ -62,7 +62,7 @@ spec:
 Invoke the function:
 
 ```shell
-$ kpt fn eval --image gcr.io/kpt-fn/list-setters:unstable
+$ kpt fn eval --image ghcr.io/kptdev/krm-functions-catalog/list-setters:unstable
 ```
 
 Output looks like the following:

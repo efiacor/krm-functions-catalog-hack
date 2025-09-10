@@ -23,7 +23,7 @@ metadata:
   name: example
 pipeline:
   validators:
-    - image: gcr.io/kpt-fn/gatekeeper:unstable
+    - image: ghcr.io/kptdev/krm-functions-catalog/gatekeeper:unstable
 ```
 
 In the constraint, we use `enforcementAction: warn` instead of
@@ -58,7 +58,7 @@ metadata:
   name: fnresults
 exitCode: 0
 items:
-  - image: gcr.io/kpt-fn/gatekeeper:unstable
+  - image: ghcr.io/kptdev/krm-functions-catalog/gatekeeper:unstable
     exitCode: 0
     results:
       - message: |-
