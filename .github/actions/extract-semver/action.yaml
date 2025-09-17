@@ -6,9 +6,11 @@ runs:
     - name: Extract semver
       shell: bash
       run: |
-        TAG="${GITHUB_REF_NAME}"
-        # Get last part after last slash
-        VERSION="${TAG##*/}"
+        # GITHUB_REF example: refs/tags/functions/go/set-namespace/v2.0.0
+        REF="${GITHUB_REF}"
+        TAG="${REF#refs/tags/}"   # remove 'refs/tags/' prefix
+        VERSION="${TAG##*/}"      # get last part after last slash
+
         # Validate semver with optional pre-release and build metadata
         if [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
           echo "version=$VERSION" >> $GITHUB_OUTPUT
