@@ -48,7 +48,7 @@ jobs:
 
       - name: Extract semver and image name
         id: extract
-        uses: ./.github/actions/extract-semver
+        uses: ./.github/actions/extract-tag-info
 
       - name: Show outputs
         run: |
