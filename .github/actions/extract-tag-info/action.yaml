@@ -7,7 +7,7 @@ runs:
       id: extract  # <--- must set id to reference outputs
       shell: bash
       run: |
-        # Full ref: refs/tags/functions/go/set-namespace/v2.0.0
+        echo "Extracting tag info from ${GITHUB_REF}"
         REF="${GITHUB_REF}"
         TAG="${REF#refs/tags/}"           # remove 'refs/tags/' prefix
         VERSION="${TAG##*/}"              # get last part after last slash
