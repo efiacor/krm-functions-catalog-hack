@@ -48,11 +48,11 @@ jobs:
 
       - name: Extract semver and image name
         id: extract
-        uses: ./.github/actions/extract-semver  # updated composite action
+        uses: ./.github/actions/extract-semver
 
-      - name: Show extracted values
+      - name: Show outputs
         run: |
-          echo "Release version = ${{ steps.extract.outputs.version }}"
+          echo "Version = ${{ steps.extract.outputs.version }}"
           echo "Image name = ${{ steps.extract.outputs.image_name }}"
 
       - name: Determine release type and push image

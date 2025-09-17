@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
     - name: Extract semver and image name
+      id: extract  # <--- must set id to reference outputs
       shell: bash
       run: |
         # Full ref: refs/tags/functions/go/set-namespace/v2.0.0
@@ -27,8 +28,11 @@ runs:
           echo "Error: Tag '$VERSION' is not a valid semver" >&2
           exit 1
         fi
+
 outputs:
   version:
     description: "The extracted semantic version from the tag"
+    value: ${{ steps.extract.outputs.version }}  # reference step id
   image_name:
     description: "The extracted image name (without functions/, contrib/functions/, or go/ prefixes)"
+    value: ${{ steps.extract.outputs.image_name }}  # reference step id
