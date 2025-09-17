@@ -79,7 +79,7 @@ $(FUNCTION_PUSH):
 	$(MAKE) CURRENT_FUNCTION=$(subst -PUSH,,$@) TAG=$(TAG) DEFAULT_CR=$(DEFAULT_CONTRIB_CR) func-push
 
 .PHONY: push-release-tag
-push-release-tag: $(MAKE) CURRENT_FUNCTION=$CURRENT_FUNCTION TAG=$(TAG) DEFAULT_CR=$(DEFAULT_CONTRIB_CR) func-push
+push-release-tag: CURRENT_FUNCTION=$(CURRENT_FUNCTION) TAG=$(TAG) DEFAULT_CR=$(DEFAULT_CONTRIB_CR) func-push
 
 .PHONY: check-licenses
 check-licenses: install-go-licenses $(FUNCTION_CHECKLICENSES)
