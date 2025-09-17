@@ -1,0 +1,21 @@
+name: "Extract Semver from Tag"
+description: "Extracts semantic version (including pre-release) from a tag and outputs it"
+runs:
+  using: "composite"
+  steps:
+    - name: Extract semver
+      shell: bash
+      run: |
+        TAG="${GITHUB_REF_NAME}"
+        # Get last part after last slash
+        VERSION="${TAG##*/}"
+        # Validate semver with optional pre-release and build metadata
+        if [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+        else
+          echo "Error: Tag '$VERSION' is not a valid semver" >&2
+          exit 1
+        fi
+outputs:
+  version:
+    description: "The extracted semantic version from the tag"
